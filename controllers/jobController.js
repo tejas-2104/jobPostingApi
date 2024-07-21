@@ -5,7 +5,11 @@ exports.createJob = async (req, res) => {
   try {
     const job = new Job(req.body);
     await job.save();
-    res.status(201).json(job);
+    res.status(201).json({
+        success: true,
+        message: "Job created successfully",
+        job_Id:job.id,
+      });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -18,7 +22,10 @@ exports.updateJob = async (req, res) => {
     if (!job) {
       return res.status(404).json({ error: 'Job not found' });
     }
-    res.status(200).json(job);
+    res.status(200).json({ 
+        message: 'Job Updated'
+
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
